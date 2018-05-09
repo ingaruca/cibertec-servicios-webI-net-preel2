@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Negocios2018Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="categorias">
+    <Key>
+      <PropertyRef Name="IdCategoria" />
+    </Key>
+    <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+    <Property Name="NombreCategoria" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="productos" Relationship="Self.FK__productos__IdCat__1B0907CE" FromRole="categorias" ToRole="productos" />
+  </EntityType>
+  <EntityType Name="productos">
+    <Key>
+      <PropertyRef Name="IdProducto" />
+    </Key>
+    <Property Name="IdProducto" Type="Int32" Nullable="false" />
+    <Property Name="NomProducto" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdProveedor" Type="Int32" />
+    <Property Name="IdCategoria" Type="Int32" />
+    <Property Name="CantxUnidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrecioUnidad" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="UnidadesEnExistencia" Type="Int16" Nullable="false" />
+    <Property Name="UnidadesEnPedido" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="categorias" Relationship="Self.FK__productos__IdCat__1B0907CE" FromRole="productos" ToRole="categorias" />
+    <NavigationProperty Name="pedidosdeta" Relationship="Self.FK__pedidosde__IdPro__2B3F6F97" FromRole="productos" ToRole="pedidosdeta" />
+    <NavigationProperty Name="proveedores" Relationship="Self.FK__productos__IdPro__1A14E395" FromRole="productos" ToRole="proveedores" />
+  </EntityType>
+  <EntityType Name="proveedores">
+    <Key>
+      <PropertyRef Name="IdProveedor" />
+    </Key>
+    <Property Name="IdProveedor" Type="Int32" Nullable="false" />
+    <Property Name="NomProveedor" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DirProveedor" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NomContacto" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CargoContacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idpais" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="fonoProveedor" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FaxProveedor" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="productos" Relationship="Self.FK__productos__IdPro__1A14E395" FromRole="proveedores" ToRole="productos" />
+    <NavigationProperty Name="paises" Relationship="Self.FK__proveedor__idpai__173876EA" FromRole="proveedores" ToRole="paises" />
+  </EntityType>
+  <EntityType Name="Cargos">
+    <Key>
+      <PropertyRef Name="idcargo" />
+    </Key>
+    <Property Name="idcargo" Type="Int32" Nullable="false" />
+    <Property Name="desCargo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="empleados" Relationship="Self.FK__empleados__idCar__22AA2996" FromRole="Cargos" ToRole="empleados" />
+  </EntityType>
+  <EntityType Name="Distritos">
+    <Key>
+      <PropertyRef Name="idDistrito" />
+    </Key>
+    <Property Name="idDistrito" Type="Int32" Nullable="false" />
+    <Property Name="nomDistrito" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="empleados" Relationship="Self.FK__empleados__idDis__21B6055D" FromRole="Distritos" ToRole="empleados" />
+  </EntityType>
+  <EntityType Name="empleados">
+    <Key>
+      <PropertyRef Name="IdEmpleado" />
+    </Key>
+    <Property Name="IdEmpleado" Type="Int32" Nullable="false" />
+    <Property Name="ApeEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NomEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FecNac" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DirEmpleado" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idDistrito" Type="Int32" />
+    <Property Name="fonoEmpleado" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="idCargo" Type="Int32" />
+    <Property Name="FecContrata" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Cargos" Relationship="Self.FK__empleados__idCar__22AA2996" FromRole="empleados" ToRole="Cargos" />
+    <NavigationProperty Name="Distritos" Relationship="Self.FK__empleados__idDis__21B6055D" FromRole="empleados" ToRole="Distritos" />
+    <NavigationProperty Name="pedidoscabe" Relationship="Self.FK__pedidosca__IdEmp__267ABA7A" FromRole="empleados" ToRole="pedidoscabe" />
+  </EntityType>
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NomCliente" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DirCliente" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idpais" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="fonoCliente" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="paises" Relationship="Self.FK__clientes__idpais__145C0A3F" FromRole="clientes" ToRole="paises" />
+    <NavigationProperty Name="pedidoscabe" Relationship="Self.FK__pedidosca__IdCli__25869641" FromRole="clientes" ToRole="pedidoscabe" />
+  </EntityType>
+  <EntityType Name="paises">
+    <Key>
+      <PropertyRef Name="Idpais" />
+    </Key>
+    <Property Name="Idpais" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="NombrePais" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="proveedores" Relationship="Self.FK__proveedor__idpai__173876EA" FromRole="paises" ToRole="proveedores" />
+    <NavigationProperty Name="clientes" Relationship="Self.FK__clientes__idpais__145C0A3F" FromRole="paises" ToRole="clientes" />
+  </EntityType>
+  <EntityType Name="pedidoscabe">
+    <Key>
+      <PropertyRef Name="IdPedido" />
+    </Key>
+    <Property Name="IdPedido" Type="Int32" Nullable="false" />
+    <Property Name="IdCliente" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="IdEmpleado" Type="Int32" />
+    <Property Name="FechaPedido" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaEntrega" Type="DateTime" Precision="3" />
+    <Property Name="FechaEnvio" Type="DateTime" Precision="3" />
+    <Property Name="EnvioPedido" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="CantidaPedido" Type="Int32" />
+    <Property Name="Destinatario" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="DirDestinatario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="CiuDestinatario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="RefDestnatario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="DepDestinatario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="PaiDestinatario" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="empleados" Relationship="Self.FK__pedidosca__IdEmp__267ABA7A" FromRole="pedidoscabe" ToRole="empleados" />
+    <NavigationProperty Name="clientes" Relationship="Self.FK__pedidosca__IdCli__25869641" FromRole="pedidoscabe" ToRole="clientes" />
+    <NavigationProperty Name="pedidosdeta" Relationship="Self.FK__pedidosde__IdPed__2A4B4B5E" FromRole="pedidoscabe" ToRole="pedidosdeta" />
+  </EntityType>
+  <EntityType Name="pedidosdeta">
+    <Key>
+      <PropertyRef Name="PrecioUnidad" />
+      <PropertyRef Name="Cantidad" />
+      <PropertyRef Name="Descuento" />
+    </Key>
+    <Property Name="IdPedido" Type="Int32" />
+    <Property Name="IdProducto" Type="Int32" />
+    <Property Name="PrecioUnidad" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Cantidad" Type="Int16" Nullable="false" />
+    <Property Name="Descuento" Type="Double" Nullable="false" />
+    <NavigationProperty Name="productos" Relationship="Self.FK__pedidosde__IdPro__2B3F6F97" FromRole="pedidosdeta" ToRole="productos" />
+    <NavigationProperty Name="pedidoscabe" Relationship="Self.FK__pedidosde__IdPed__2A4B4B5E" FromRole="pedidosdeta" ToRole="pedidoscabe" />
+  </EntityType>
+  <Association Name="FK__productos__IdCat__1B0907CE">
+    <End Role="categorias" Type="Self.categorias" Multiplicity="0..1" />
+    <End Role="productos" Type="Self.productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categorias">
+        <PropertyRef Name="IdCategoria" />
+      </Principal>
+      <Dependent Role="productos">
+        <PropertyRef Name="IdCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pedidosde__IdPro__2B3F6F97">
+    <End Role="productos" Type="Self.productos" Multiplicity="0..1" />
+    <End Role="pedidosdeta" Type="Self.pedidosdeta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="productos">
+        <PropertyRef Name="IdProducto" />
+      </Principal>
+      <Dependent Role="pedidosdeta">
+        <PropertyRef Name="IdProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__productos__IdPro__1A14E395">
+    <End Role="proveedores" Type="Self.proveedores" Multiplicity="0..1" />
+    <End Role="productos" Type="Self.productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="proveedores">
+        <PropertyRef Name="IdProveedor" />
+      </Principal>
+      <Dependent Role="productos">
+        <PropertyRef Name="IdProveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__proveedor__idpai__173876EA">
+    <End Role="paises" Type="Self.paises" Multiplicity="0..1" />
+    <End Role="proveedores" Type="Self.proveedores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paises">
+        <PropertyRef Name="Idpais" />
+      </Principal>
+      <Dependent Role="proveedores">
+        <PropertyRef Name="idpais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__empleados__idCar__22AA2996">
+    <End Role="Cargos" Type="Self.Cargos" Multiplicity="0..1" />
+    <End Role="empleados" Type="Self.empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cargos">
+        <PropertyRef Name="idcargo" />
+      </Principal>
+      <Dependent Role="empleados">
+        <PropertyRef Name="idCargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__empleados__idDis__21B6055D">
+    <End Role="Distritos" Type="Self.Distritos" Multiplicity="0..1" />
+    <End Role="empleados" Type="Self.empleados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distritos">
+        <PropertyRef Name="idDistrito" />
+      </Principal>
+      <Dependent Role="empleados">
+        <PropertyRef Name="idDistrito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pedidosca__IdEmp__267ABA7A">
+    <End Role="empleados" Type="Self.empleados" Multiplicity="0..1" />
+    <End Role="pedidoscabe" Type="Self.pedidoscabe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empleados">
+        <PropertyRef Name="IdEmpleado" />
+      </Principal>
+      <Dependent Role="pedidoscabe">
+        <PropertyRef Name="IdEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__clientes__idpais__145C0A3F">
+    <End Role="paises" Type="Self.paises" Multiplicity="0..1" />
+    <End Role="clientes" Type="Self.clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="paises">
+        <PropertyRef Name="Idpais" />
+      </Principal>
+      <Dependent Role="clientes">
+        <PropertyRef Name="idpais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pedidosca__IdCli__25869641">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+    <End Role="pedidoscabe" Type="Self.pedidoscabe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="pedidoscabe">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pedidosde__IdPed__2A4B4B5E">
+    <End Role="pedidoscabe" Type="Self.pedidoscabe" Multiplicity="0..1" />
+    <End Role="pedidosdeta" Type="Self.pedidosdeta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pedidoscabe">
+        <PropertyRef Name="IdPedido" />
+      </Principal>
+      <Dependent Role="pedidosdeta">
+        <PropertyRef Name="IdPedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Negocios2018Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categorias" EntityType="Self.categorias" />
+    <EntitySet Name="productos" EntityType="Self.productos" />
+    <EntitySet Name="proveedores" EntityType="Self.proveedores" />
+    <EntitySet Name="Cargos" EntityType="Self.Cargos" />
+    <EntitySet Name="Distritos" EntityType="Self.Distritos" />
+    <EntitySet Name="empleados" EntityType="Self.empleados" />
+    <EntitySet Name="clientes" EntityType="Self.clientes" />
+    <EntitySet Name="paises" EntityType="Self.paises" />
+    <EntitySet Name="pedidoscabe" EntityType="Self.pedidoscabe" />
+    <EntitySet Name="pedidosdeta" EntityType="Self.pedidosdeta" />
+    <AssociationSet Name="FK__productos__IdCat__1B0907CE" Association="Self.FK__productos__IdCat__1B0907CE">
+      <End Role="categorias" EntitySet="categorias" />
+      <End Role="productos" EntitySet="productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pedidosde__IdPro__2B3F6F97" Association="Self.FK__pedidosde__IdPro__2B3F6F97">
+      <End Role="productos" EntitySet="productos" />
+      <End Role="pedidosdeta" EntitySet="pedidosdeta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__productos__IdPro__1A14E395" Association="Self.FK__productos__IdPro__1A14E395">
+      <End Role="proveedores" EntitySet="proveedores" />
+      <End Role="productos" EntitySet="productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__proveedor__idpai__173876EA" Association="Self.FK__proveedor__idpai__173876EA">
+      <End Role="paises" EntitySet="paises" />
+      <End Role="proveedores" EntitySet="proveedores" />
+    </AssociationSet>
+    <AssociationSet Name="FK__empleados__idCar__22AA2996" Association="Self.FK__empleados__idCar__22AA2996">
+      <End Role="Cargos" EntitySet="Cargos" />
+      <End Role="empleados" EntitySet="empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__empleados__idDis__21B6055D" Association="Self.FK__empleados__idDis__21B6055D">
+      <End Role="Distritos" EntitySet="Distritos" />
+      <End Role="empleados" EntitySet="empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pedidosca__IdEmp__267ABA7A" Association="Self.FK__pedidosca__IdEmp__267ABA7A">
+      <End Role="empleados" EntitySet="empleados" />
+      <End Role="pedidoscabe" EntitySet="pedidoscabe" />
+    </AssociationSet>
+    <AssociationSet Name="FK__clientes__idpais__145C0A3F" Association="Self.FK__clientes__idpais__145C0A3F">
+      <End Role="paises" EntitySet="paises" />
+      <End Role="clientes" EntitySet="clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pedidosca__IdCli__25869641" Association="Self.FK__pedidosca__IdCli__25869641">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="pedidoscabe" EntitySet="pedidoscabe" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pedidosde__IdPed__2A4B4B5E" Association="Self.FK__pedidosde__IdPed__2A4B4B5E">
+      <End Role="pedidoscabe" EntitySet="pedidoscabe" />
+      <End Role="pedidosdeta" EntitySet="pedidosdeta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

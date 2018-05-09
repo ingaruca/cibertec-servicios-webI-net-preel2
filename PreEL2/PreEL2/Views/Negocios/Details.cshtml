@@ -1,0 +1,51 @@
+﻿@model PreEL2.Models.clientes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="text-center text-primary">Detalle de Cliente</h2>
+
+<div>
+    <h4>Código de Cliente: @Html.DisplayFor(model => model.IdCliente)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DirCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DirCliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idpais)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paises.NombrePais)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fonoCliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fonoCliente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdCliente }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

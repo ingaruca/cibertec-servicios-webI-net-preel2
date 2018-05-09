@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PreEL2.Models.clientes>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center text-primary">Listado de Clientes</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Cliente", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DirCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paises.NombrePais)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fonoCliente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DirCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paises.NombrePais)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fonoCliente)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id = item.IdCliente }) |
+            @Html.ActionLink("Detalles", "Details", new { id = item.IdCliente }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id = item.IdCliente })
+        </td>
+    </tr>
+}
+
+</table>
